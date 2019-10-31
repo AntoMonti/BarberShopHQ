@@ -5,6 +5,12 @@ require 'sinatra/activerecord'
 
 set :database, "sqlite3:barbershop.db"
 
+class Client < ActiveRecord::Base
+
+
+end
+
+
 #def get_db
 	#db = SQLite3::Database.new 'barbershop.db'
 	#db.results_as_hash = true
