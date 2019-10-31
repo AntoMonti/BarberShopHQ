@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="./jquery.datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script src="./jquery.js"></script>
+    <script src="./jquery.datetimepicker.full.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <ul class="topnav">
+        <li><a href="/">HOME</a></li>
+        <li><a class ="active" href="/visit">VISIT</a></li>
+        <li><a href="/services">SERVICES</a></li>
+        <li><a href="/about">BARBERS</a></li>
+        <li class="right"><a href="/contacts">CONTACTS</a></li>
+      </ul>
+
+<div class="container">
+      <div class="error"><%= @visit_error%></div>   
+  <form action="/visit" method="POST">
+  <div class="row">
+    <div class="col-25">
+      <label for="fname">Name</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="fname" name="user_name" placeholder="Your name.." value="<%= @user_name %>">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Phone</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="lname" name="phone" placeholder="Your phone.." value="<%= @phone %>">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="country">Barber</label>
+    </div>
+    <div class="col-75">
+      <select id="country" name="barber">
+      	<option value="barber" <%= @barber == 'barber'? 'selected' : "" %>>Anybody barber</option>
+        <option value="Walter White" <%= @barber == 'Walter White'? 'selected' : "" %>>Walter White</option>
+        <option value="Jessie Pinkman" <%= @barber == 'Jessie Pinkman'? 'selected' : "" %>>Jessie Pinkman</option>
+        <option value="Gus Fring" <%= @barber == 'Gus Fring'? 'selected' : "" %>>Gus Fring</option>
+        <option value="Angelina Jolly" <%= @barber == 'Angelina Jolly'? 'selected' : "" %>>Angelina Jolly</option>
+        <option value="Jessica Alba" <%= @barber == 'Jessica Alba'? 'selected' : "" %>>Jessica Alba</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="subject">Date and Time</label>
+    </div>
+    <div class="col-75">
+      <input id="datetime" type="text" name="date_time" placeholder="Date and Time" value="<%= @date_time %>">
+      <script>
+          $("#datetime").datetimepicker({
+              step: 60
+            });
+      </script>
+    </div>
+  </div>
+  <div class="row">
+    <input type="submit" value="Enroll">
+  </div>
+  </form>
+</div>
+
+</body>
+</html>
+
