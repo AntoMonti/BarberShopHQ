@@ -8,18 +8,6 @@ set :database, "sqlite3:barbershop.db"
 class Client < ActiveRecord::Base
 end
 
-
-#def get_db
-	#db = SQLite3::Database.new 'barbershop.db'
-	#db.results_as_hash = true
-	#return db
-#end
-
-#configure do
-	#db = get_db
-	#db.execute 'CREATE TABLE IF NOT EXISTS "Users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "username" TEXT, "phone" TEXT, "date_time" TEXT, "barber" TEXT)'
-#end
-
 get '/' do
 	erb :index
 end
