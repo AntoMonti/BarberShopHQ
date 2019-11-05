@@ -1,2 +1,2 @@
-require "./barbershop.rb"
+require "./barbershop"
 require "sinatra/activerecord/rake"
