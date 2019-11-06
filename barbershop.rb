@@ -6,6 +6,10 @@ require 'sinatra/activerecord'
 set :database, "sqlite3:barbershop.db"
 
 class Client < ActiveRecord::Base
+	validates :name, presence: true, length: { minimum: 3 } #length чисто для понимания текущего синтаксиса 
+	validates :phone, presence: true
+	validates :datestamp, presence: true
+	validates :barber, presence: true
 end
 
 get '/' do
@@ -13,40 +17,37 @@ get '/' do
 end
 
 get '/visit' do
+	@c = Client.new
 	erb :visit
 end
 
 post '/visit' do
 
-	@user_name = params[:user_name]
-	@phone = params[:phone]
-	@date_time = params[:date_time]
-	@barber = params[:barber]
+	#hh = { :user_name => 'Enter your name',
+		 #:phone => 'Enter your phone',
+		 #:date_time => 'Enter Date and Time'
+	#}
 
-	hh = { :user_name => 'Enter your name',
-		 :phone => 'Enter your phone',
-		 :date_time => 'Enter Date and Time'
-	}
+	#@visit_error = hh.select {|key,_| params[key] == ""}.values.join(", ")
+	#if @visit_error != ""
+		#return erb :visit
+	#end
 
-	@visit_error = hh.select {|key,_| params[key] == ""}.values.join(", ")
-	if @visit_error != ""
-		return erb :visit
+	@c = Client.new params[:client]
+	if @c.save
+		erb :visit
+	else
+		@error = @c.errors.full_messages.first
+		erb :message
 	end
 
-	c = Client.new
-	c.name = @user_name
-	c.phone = @phone
-	c.datestamp = @date_time
-	c.barber = @barber
-	c.save
-	
-	@title = "Thank you!"
-	@message = "Dear #{@user_name}, #{@barber} call you after few minutes and confirm your request or correct it relative by shedule" 
+	#@title = "Thank you!"
+	#@message = "Dear #{@user_name}, #{@barber} call you after few minutes and confirm your request or correct it relative by shedule" 
 	
 	#db = get_db
 	#get_db.execute 'insert into Users (username, phone, date_time, barber) values (?, ?, ?, ?)', [@user_name, @phone, @date_time, @barber]
 	
-	erb :message
+	
 
 
 end
@@ -89,10 +90,11 @@ end
 
 get '/showusers' do
 
-	db = get_db
-	@results = db.execute 'select * from users order by id desc' 
-	
+	@clients = Client.order('created_at DESC')
 	erb :admin
+
+	#db = get_db
+	#@results = db.execute 'select * from users order by id desc' 
 end
 
 

@@ -25,7 +25,7 @@
       <label for="fname">Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="user_name" placeholder="Your name.." value="<%= @user_name %>">
+      <input type="text" id="fname" name="client[name]" placeholder="Your name.." value="<%= @c.name %>">
     </div>
   </div>
   <div class="row">
@@ -33,7 +33,7 @@
       <label for="lname">Phone</label>
     </div>
     <div class="col-75">
-      <input type="text" id="lname" name="phone" placeholder="Your phone.." value="<%= @phone %>">
+      <input type="text" id="lname" name="client[phone]" placeholder="Your phone.." value="<%= @c.phone %>">
     </div>
   </div>
   <div class="row">
@@ -41,13 +41,13 @@
       <label for="country">Barber</label>
     </div>
     <div class="col-75">
-      <select id="country" name="barber">
-      	<option value="barber" <%= @barber == 'barber'? 'selected' : "" %>>Anybody barber</option>
-        <option value="Walter White" <%= @barber == 'Walter White'? 'selected' : "" %>>Walter White</option>
-        <option value="Jessie Pinkman" <%= @barber == 'Jessie Pinkman'? 'selected' : "" %>>Jessie Pinkman</option>
-        <option value="Gus Fring" <%= @barber == 'Gus Fring'? 'selected' : "" %>>Gus Fring</option>
-        <option value="Angelina Jolly" <%= @barber == 'Angelina Jolly'? 'selected' : "" %>>Angelina Jolly</option>
-        <option value="Jessica Alba" <%= @barber == 'Jessica Alba'? 'selected' : "" %>>Jessica Alba</option>
+      <select id="country" name="client[barber]">
+        <option value="Walter White" <%= 'Walter White'? 'selected' : "" %>>Walter White</option>
+        <option value="Jessie Pinkman" <%= 'Jessie Pinkman'? 'selected' : "" %>>Jessie Pinkman</option>
+        <option value="Gus Fring" <%= 'Gus Fring'? 'selected' : "" %>>Gus Fring</option>
+        <option value="Angelina Jolly" <%= 'Angelina Jolly'? 'selected' : "" %>>Angelina Jolly</option>
+        <option value="Jessica Alba" <%= 'Jessica Alba'? 'selected' : "" %>>Jessica Alba</option>
+        <option value="barber" <%= 'barber'? 'selected' : "" %>>Anybody barber</option>
       </select>
     </div>
   </div>
@@ -56,7 +56,7 @@
       <label for="subject">Date and Time</label>
     </div>
     <div class="col-75">
-      <input id="datetime" type="text" name="date_time" placeholder="Date and Time" value="<%= @date_time %>">
+      <input id="datetime" type="text" name="client[datestamp]" placeholder="Date and Time" value="<%= @c.datestamp %>">
       <script>
           $("#datetime").datetimepicker({
               step: 60
