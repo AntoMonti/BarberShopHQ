@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_11_05_180453) do
 
-  create_table "client", force: :cascade do |t|
+  create_table "clients", force: :cascade do |t|
     t.text "name"
     t.text "phone"
     t.text "datestamp"

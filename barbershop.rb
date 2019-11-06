@@ -33,13 +33,22 @@ post '/visit' do
 		return erb :visit
 	end
 
+	c = Client.new
+	c.name = @user_name
+	c.phone = @phone
+	c.datestamp = @date_time
+	c.barber = @barber
+	c.save
+	
 	@title = "Thank you!"
 	@message = "Dear #{@user_name}, #{@barber} call you after few minutes and confirm your request or correct it relative by shedule" 
 	
-	db = get_db
-	get_db.execute 'insert into Users (username, phone, date_time, barber) values (?, ?, ?, ?)', [@user_name, @phone, @date_time, @barber]
+	#db = get_db
+	#get_db.execute 'insert into Users (username, phone, date_time, barber) values (?, ?, ?, ?)', [@user_name, @phone, @date_time, @barber]
 	
 	erb :message
+
+
 end
 
 get '/services' do
