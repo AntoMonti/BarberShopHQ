@@ -23,7 +23,7 @@
       <label for="fname">Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="contact_name" placeholder="Your name.." value="<%= @contact_name %>">
+      <input type="text" id="fname" name="contact[name]" placeholder="Your name.." value="<%= @contact_form.name %>">
     </div>
   </div>
     <div class="row">
@@ -31,7 +31,7 @@
       <label for="fname">Email</label>
     </div>
     <div class="col-75">
-      <input type="text" id="fname" name="contact_email" placeholder="Your Email.." value="<%= @contact_email %>">
+      <input type="text" id="fname" name="contact[email]" placeholder="Your Email.." value="<%= @contact_form.email %>">
     </div>
   </div>
   <div class="row">
@@ -39,7 +39,7 @@
       <label for="subject">Message</label>
     </div>
     <div class="col-75">
-      <textarea id="subject" name="contact_message" placeholder="Write something.." value="<%= @contact_message %>" style="height:200px"></textarea>
+      <textarea id="subject" name="contact[message]" placeholder="Write something.." value="<%= @contact_form.message %>" style="height:200px"></textarea>
     </div>
   </div>
   <div class="row">

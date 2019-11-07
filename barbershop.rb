@@ -12,6 +12,13 @@ class Client < ActiveRecord::Base
 	validates :barber, presence: true
 end
 
+class Contact < ActiveRecord::Base
+	validates :name, presence: true
+	validates :email, presence: true
+	validates :message, presence: true
+end
+
+
 get '/' do
 	erb :index
 end
@@ -47,9 +54,6 @@ post '/visit' do
 	#db = get_db
 	#get_db.execute 'insert into Users (username, phone, date_time, barber) values (?, ?, ?, ?)', [@user_name, @phone, @date_time, @barber]
 	
-	
-
-
 end
 
 get '/services' do
@@ -61,31 +65,38 @@ get '/about' do
 end
 
 get '/contacts' do
+	@contact_form = Contact.new
 	erb :contacts
 end
 
 post '/contacts' do
 	
-	@contact_name = params[:contact_name]
-	@contact_email = params[:contact_email]
-	@contact_message = params[:contact_message]
-	
-	ch = { :contact_name => 'Enter your name',
-		   :contact_email => 'Enter your email',
-		   :contact_message => 'Enter your message'
-	}
 
-
-	@contact_error = ch.select {|key,_| params[key] == ""}.values.join(", ")
-	if @contact_error != ""
-		return erb :contacts
+	@contact_form = Contact.new params[:contact]
+	if @contact_form.save
+		erb :contacts
+	else
+		@error = @contact_form.errors.full_messages.first
+		erb :message
 	end
 
-	@title = "Thank you!"
-	@message = "Dear #{@contact_name}, we will try respond your neat time" 
+	#@contact_name = params[:contact_name]
+	#@contact_email = params[:contact_email]
+	#@contact_message = params[:contact_message]
 	
+	#ch = { :contact_name => 'Enter your name',
+		   #:contact_email => 'Enter your email',
+		   #:contact_message => 'Enter your message'
+	#}
 
-	erb :message
+
+	#@contact_error = ch.select {|key,_| params[key] == ""}.values.join(", ")
+	#if @contact_error != ""
+		#return erb :contacts
+	#end
+
+	#@title = "Thank you!"
+	#@message = "Dear #{@contact_name}, we will try respond your neat time" 
 end
 
 get '/showusers' do
